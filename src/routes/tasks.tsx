@@ -22,7 +22,7 @@ export const Route = createFileRoute("/tasks")({
     ],
   }),
   validateSearch: (s: Record<string, unknown>) => ({
-    q: typeof s.q === "string" ? s.q : "",
+    q: typeof s.q === "string" && s.q ? s.q : undefined,
   }),
   component: TaskListPage,
 });
