@@ -34,40 +34,31 @@ function TaskListPage() {
   const { q: initialQ } = Route.useSearch();
   const navigate = useNavigate();
 
+type ViewMode = "board" | "list";
+
+function TaskListPage() {
+  const tasks = useTasks();
+  const { q: initialQ } = Route.useSearch();
+  const navigate = useNavigate();
+
   const [query, setQuery] = useState(initialQ ?? "");
-  const [status, setStatus] = useState<StatusFilter>("All");
-  const [sort, setSort] = useState<SortOrder>("newest");
-  const [page, setPage] = useState(1);
+  const [view, setView] = useState<ViewMode>("board");
   const [toDelete, setToDelete] = useState<Task | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    let list = tasks.filter((t) => {
-      if (status !== "All" && t.status !== status) return false;
-      if (!q) return true;
-      return (
+    if (!q) return tasks;
+    return tasks.filter(
+      (t) =>
         t.id.toLowerCase().includes(q) ||
         t.title.toLowerCase().includes(q) ||
-        t.owner.toLowerCase().includes(q)
-      );
-    });
-    list = list.sort((a, b) => {
-      const diff = +new Date(b.createdDate) - +new Date(a.createdDate);
-      return sort === "newest" ? diff : -diff;
-    });
-    return list;
-  }, [tasks, query, status, sort]);
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const safePage = Math.min(page, totalPages);
-  const paged = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+        t.owner.toLowerCase().includes(q),
+    );
+  }, [tasks, query]);
 
   const resetFilters = () => {
     setQuery("");
-    setStatus("All");
-    setSort("newest");
-    setPage(1);
     navigate({ to: "/tasks", search: {} });
   };
 
