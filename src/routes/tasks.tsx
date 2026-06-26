@@ -133,43 +133,35 @@ function TaskListPage() {
               id="tasks-search"
               type="text"
               value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setPage(1);
-              }}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by ID, title, or owner…"
               className="h-10 w-full rounded-md border border-border bg-background pl-9 pr-3 text-sm placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="inline-flex rounded-md border border-border bg-background p-0.5">
-              {(["All", ...TASK_STATUSES] as StatusFilter[]).map((s) => (
-                <button
-                  key={s}
-                  onClick={() => {
-                    setStatus(s);
-                    setPage(1);
-                  }}
-                  className={`rounded px-3 py-1.5 text-xs font-medium transition-colors ${
-                    status === s
-                      ? "bg-primary text-primary-foreground shadow-soft"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as SortOrder)}
-              className="h-9 rounded-md border border-border bg-background px-3 text-xs font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          <div className="inline-flex rounded-md border border-border bg-background p-0.5">
+            <button
+              onClick={() => setView("board")}
+              aria-pressed={view === "board"}
+              className={`inline-flex items-center gap-1.5 rounded px-3 py-1.5 text-xs font-medium transition-colors ${
+                view === "board"
+                  ? "bg-primary text-primary-foreground shadow-soft"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
-              <option value="newest">Newest first</option>
-              <option value="oldest">Oldest first</option>
-            </select>
+              <LayoutGrid className="h-3.5 w-3.5" /> Board
+            </button>
+            <button
+              onClick={() => setView("list")}
+              aria-pressed={view === "list"}
+              className={`inline-flex items-center gap-1.5 rounded px-3 py-1.5 text-xs font-medium transition-colors ${
+                view === "list"
+                  ? "bg-primary text-primary-foreground shadow-soft"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <List className="h-3.5 w-3.5" /> List
+            </button>
           </div>
         </div>
       </div>
@@ -190,47 +182,26 @@ function TaskListPage() {
         />
       ) : filtered.length === 0 ? (
         <EmptyState
-          title="No tasks match your filters"
-          description="Try a different search term or clear the filters to see all tasks."
+          title="No tasks match your search"
+          description="Try a different search term or clear it to see all tasks."
           illustration="search"
           action={
             <button
               onClick={resetFilters}
               className="rounded-md border border-border bg-card px-4 py-2 text-sm font-medium text-foreground hover:bg-muted"
             >
-              Clear filters
+              Clear search
             </button>
           }
         />
+      ) : view === "board" ? (
+        <KanbanBoard
+          tasks={filtered}
+          onDelete={setToDelete}
+          onCreate={() => navigate({ to: "/task/new" })}
+        />
       ) : (
-        <>
-          <TaskTable tasks={paged} onDelete={setToDelete} />
-
-          {totalPages > 1 && (
-            <div className="flex items-center justify-between">
-              <p className="mono text-xs text-muted-foreground">
-                Page {safePage} of {totalPages} · {filtered.length} result
-                {filtered.length === 1 ? "" : "s"}
-              </p>
-              <div className="flex gap-1">
-                <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={safePage === 1}
-                  className="rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted disabled:opacity-40"
-                >
-                  Previous
-                </button>
-                <button
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={safePage === totalPages}
-                  className="rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted disabled:opacity-40"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
-          )}
-        </>
+        <TaskTable tasks={filtered} onDelete={setToDelete} />
       )}
 
       <ConfirmModal
