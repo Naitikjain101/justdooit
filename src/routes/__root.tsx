@@ -93,6 +93,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "TaskFlow — Move work through stages" },
+      { name: "description", content: "TaskFlow is a modern, responsive web app for managing tasks locally." },
+      { property: "og:description", content: "TaskFlow is a modern, responsive web app for managing tasks locally." },
+      { name: "twitter:description", content: "TaskFlow is a modern, responsive web app for managing tasks locally." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/8ZPPaU7TIbY5N2zQz8f9UMHkAug2/social-images/social-1782476346808-image_just.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/8ZPPaU7TIbY5N2zQz8f9UMHkAug2/social-images/social-1782476346808-image_just.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
