@@ -27,19 +27,13 @@ export const Route = createFileRoute("/tasks")({
   component: TaskListPage,
 });
 
-const PAGE_SIZE = 10;
-
-function TaskListPage() {
-  const tasks = useTasks();
-  const { q: initialQ } = Route.useSearch();
-  const navigate = useNavigate();
-
 type ViewMode = "board" | "list";
 
 function TaskListPage() {
   const tasks = useTasks();
   const { q: initialQ } = Route.useSearch();
   const navigate = useNavigate();
+
 
   const [query, setQuery] = useState(initialQ ?? "");
   const [view, setView] = useState<ViewMode>("board");
