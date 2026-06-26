@@ -162,6 +162,18 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
+  .dark body {
+    background-color: var(--color-background);
+    background-image:
+      radial-gradient(900px 500px at 12% -10%, rgba(255, 106, 77, 0.10), transparent 60%),
+      radial-gradient(700px 480px at 95% 0%, rgba(92, 216, 168, 0.06), transparent 65%),
+      radial-gradient(1000px 600px at 50% 110%, rgba(124, 192, 227, 0.05), transparent 70%);
+    background-attachment: fixed;
+  }
+  .dark ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
   h1,
   h2,
   h3,
