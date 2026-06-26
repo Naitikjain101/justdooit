@@ -5,7 +5,7 @@ import { taskService } from "@/services/taskService";
 import { TaskForm } from "@/components/tasks/TaskForm";
 import { PageHeader } from "./index";
 
-export const Route = createFileRoute("/task/$id/edit")({
+export const Route = createFileRoute("/task/$id_/edit")({
   head: () => ({
     meta: [
       { title: "Edit Task — TaskFlow" },
