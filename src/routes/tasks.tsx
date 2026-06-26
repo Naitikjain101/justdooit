@@ -1,16 +1,16 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMemo, useRef, useState } from "react";
-import { Plus, Search, Upload, Download } from "lucide-react";
+import { Plus, Search, Upload, Download, LayoutGrid, List } from "lucide-react";
 import { toast } from "sonner";
 import { useTasks } from "@/hooks/useTasks";
 import { taskService } from "@/services/taskService";
 import { TaskTable } from "@/components/tasks/TaskTable";
+import { KanbanBoard } from "@/components/tasks/KanbanBoard";
 import { EmptyState } from "@/components/tasks/EmptyState";
 import { ConfirmModal } from "@/components/modals/ConfirmModal";
 import { PageHeader } from "./index";
 import { csvToTasks, downloadCsv, tasksToCsv } from "@/utils/csv";
-import type { SortOrder, StatusFilter, Task } from "@/types/task";
-import { TASK_STATUSES } from "@/types/task";
+import type { Task } from "@/types/task";
 
 export const Route = createFileRoute("/tasks")({
   head: () => ({
