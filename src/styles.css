@@ -66,84 +66,89 @@
 }
 
 :root {
-  /* Brand */
-  --ink: #11182e;
-  --ink-deep: #0d1226;
-  --ink-soft: #1a2240;
-  --ink-line: #242d52;
+  /* Brand — "Ember Noir": warm graphite base, coral signature */
+  --ink: #0e0f14;
+  --ink-deep: #08090d;
+  --ink-soft: #15171f;
+  --ink-line: #232633;
 
-  --paper: #f7f6f2;
-  --paper-soft: #f1efe8;
-  --paper-line: #e7e3d9;
+  --paper: #f5f1ea;
+  --paper-soft: #ece7dc;
+  --paper-line: #ddd6c6;
 
-  /* Status (light) */
-  --status-open: #3e7cb8;
-  --status-open-bg: #e7f0f8;
-  --status-progress: #c9852b;
-  --status-progress-bg: #fbf0e0;
-  --status-completed: #3f8f5f;
-  --status-completed-bg: #e7f3ec;
+  /* Status (light fallback) */
+  --status-open: #4a90b8;
+  --status-open-bg: #e3eef5;
+  --status-progress: #c4862f;
+  --status-progress-bg: #f8ecd4;
+  --status-completed: #2f9a78;
+  --status-completed-bg: #dff1ea;
 
-  /* Semantic */
-  --background: #f7f6f2;
-  --foreground: #11182e;
+  /* Semantic (light fallback — app defaults to dark) */
+  --background: #f5f1ea;
+  --foreground: #0e0f14;
   --card: #ffffff;
-  --card-foreground: #11182e;
+  --card-foreground: #0e0f14;
   --popover: #ffffff;
-  --popover-foreground: #11182e;
-  --primary: #5b5fef;
+  --popover-foreground: #0e0f14;
+  --primary: #ff6a4d;
   --primary-foreground: #ffffff;
-  --primary-hover: #4a47d6;
-  --primary-tint: #f0f0ff;
-  --primary-tint-strong: #e2e2ff;
-  --secondary: #f1efe8;
-  --secondary-foreground: #11182e;
-  --muted: #f1efe8;
-  --muted-foreground: #5b6378;
-  --accent: #e2e2ff;
-  --accent-foreground: #11182e;
+  --primary-hover: #f25638;
+  --primary-tint: #ffe8e2;
+  --primary-tint-strong: #ffd2c5;
+  --secondary: #ece7dc;
+  --secondary-foreground: #0e0f14;
+  --muted: #ece7dc;
+  --muted-foreground: #5a5d6b;
+  --accent: #ffd2c5;
+  --accent-foreground: #0e0f14;
   --destructive: #b9533f;
   --destructive-foreground: #ffffff;
-  --border: #e7e3d9;
-  --input: #e7e3d9;
-  --ring: #5b5fef;
+  --border: #ddd6c6;
+  --input: #ddd6c6;
+  --ring: #ff6a4d;
 }
 
 .dark {
-  --ink: #11182e;
-  --ink-deep: #0d1226;
-  --ink-soft: #1a2240;
-  --ink-line: #242d52;
+  /* Default theme — Ember Noir dark */
+  --ink: #0e0f14;
+  --ink-deep: #06070a;
+  --ink-soft: #15171f;
+  --ink-line: #232633;
 
-  --status-open: #8ab8de;
-  --status-open-bg: #1c2c3d;
-  --status-progress: #e3ad6b;
-  --status-progress-bg: #3a2c14;
-  --status-completed: #7cc093;
-  --status-completed-bg: #16301f;
+  /* Status: cool sky / warm amber / mint — readable on near-black */
+  --status-open: #7cc0e3;
+  --status-open-bg: #16242e;
+  --status-progress: #f2b554;
+  --status-progress-bg: #2e2415;
+  --status-completed: #5cd8a8;
+  --status-completed-bg: #112a23;
 
-  --background: #0d1226;
-  --foreground: #eef0f7;
-  --card: #11182e;
-  --card-foreground: #eef0f7;
-  --popover: #1a2240;
-  --popover-foreground: #eef0f7;
-  --primary: #5b5fef;
-  --primary-foreground: #ffffff;
-  --primary-hover: #7376f2;
-  --primary-tint: #1a2240;
-  --primary-tint-strong: #242d52;
-  --secondary: #1a2240;
-  --secondary-foreground: #eef0f7;
-  --muted: #1a2240;
-  --muted-foreground: #9aa3bf;
-  --accent: #242d52;
-  --accent-foreground: #eef0f7;
-  --destructive: #d97160;
-  --destructive-foreground: #ffffff;
-  --border: #242d52;
-  --input: #242d52;
-  --ring: #5b5fef;
+  --background: #0a0b10;
+  --foreground: #ede9df;
+  --card: #13141b;
+  --card-foreground: #ede9df;
+  --popover: #181a23;
+  --popover-foreground: #ede9df;
+
+  /* Signature accent: electric coral — distinctive, not the usual violet/blue */
+  --primary: #ff6a4d;
+  --primary-foreground: #0a0b10;
+  --primary-hover: #ff8a72;
+  --primary-tint: #251410;
+  --primary-tint-strong: #3a1d17;
+
+  --secondary: #181a23;
+  --secondary-foreground: #ede9df;
+  --muted: #14161d;
+  --muted-foreground: #8a8d9c;
+  --accent: #251410;
+  --accent-foreground: #ff8a72;
+  --destructive: #e26a55;
+  --destructive-foreground: #0a0b10;
+  --border: #1f2230;
+  --input: #1f2230;
+  --ring: #ff6a4d;
 }
 
 @layer base {
@@ -156,6 +161,18 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+  }
+  .dark body {
+    background-color: var(--color-background);
+    background-image:
+      radial-gradient(900px 500px at 12% -10%, rgba(255, 106, 77, 0.10), transparent 60%),
+      radial-gradient(700px 480px at 95% 0%, rgba(92, 216, 168, 0.06), transparent 65%),
+      radial-gradient(1000px 600px at 50% 110%, rgba(124, 192, 227, 0.05), transparent 70%);
+    background-attachment: fixed;
+  }
+  .dark ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
   h1,
   h2,

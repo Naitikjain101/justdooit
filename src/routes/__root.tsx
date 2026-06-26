@@ -110,7 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-const DARK_INIT = `(function(){try{var s=localStorage.getItem('taskflow.theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){}})();`;
+const DARK_INIT = `(function(){try{var s=localStorage.getItem('taskflow.theme');var d=s?s==='dark':true;if(d)document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();`;
 
 function RootShell({ children }: { children: ReactNode }) {
   return (

@@ -3,11 +3,11 @@ import { useEffect, useState, useCallback } from "react";
 const KEY = "taskflow.theme";
 
 function getInitial(): boolean {
-  if (typeof window === "undefined") return false;
+  if (typeof window === "undefined") return true;
   const stored = localStorage.getItem(KEY);
   if (stored === "dark") return true;
   if (stored === "light") return false;
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+  return true;
 }
 
 export function useDarkMode() {
